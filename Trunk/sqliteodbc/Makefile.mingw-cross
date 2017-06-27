@@ -1,7 +1,7 @@
 # Makefile for SQLite ODBC Drivers
 # using MinGW cross compiler
 
-MINGW =		/opt/mingw64/bin/x86_64-w64-mingw32-
+MINGW =		/usr/bin/x86_64-w64-mingw32-
 CC =		$(MINGW)gcc -m32 -march=i386 -mtune=i386
 STRIP =		$(MINGW)strip
 RC =		$(MINGW)windres -F pe-i386

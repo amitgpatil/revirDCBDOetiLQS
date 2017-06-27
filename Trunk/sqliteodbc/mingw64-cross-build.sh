@@ -20,6 +20,9 @@
 # SQLITE_DLLS=2     build driver with refs to sqlite3.dll
 #                   driver can use System.Data.SQLite.dll instead
 
+#!/bin/bash
+cd /media/amit/8A52F61E52F60F27/SQLiteRND/sqliteodbc-0.9995/sqliteodbc-0.9995
+
 set -e
 
 VER2=2.8.17
@@ -62,8 +65,7 @@ fi
 echo "=================="
 echo "Preparing zlib ..."
 echo "=================="
-test -r zlib-${VERZ}.tar.gz || \
-    wget -c http://zlib.net/zlib-${VERZ}.tar.gz || exit 1
+test -r zlib-${VERZ}.tar.gz
 rm -rf zlib-${VERZ}
 tar xzf zlib-${VERZ}.tar.gz
 ln -sf zlib-${VERZ} zlib
@@ -71,10 +73,7 @@ ln -sf zlib-${VERZ} zlib
 echo "===================="
 echo "Preparing sqlite ..."
 echo "===================="
-( $nov2 && echo '*** skipped (NO_SQLITE2)' ) || true
-$nov2 || test -r sqlite-${VER2}.tar.gz || \
-    wget -c http://www.sqlite.org/sqlite-${VER2}.tar.gz \
-      --no-check-certificate
+
 $nov2 || test -r sqlite-${VER2}.tar.gz || exit 1
 
 $nov2 || rm -f sqlite
@@ -260,10 +259,8 @@ EOD
 echo "====================="
 echo "Preparing sqlite3 ..."
 echo "====================="
-test -r sqlite-src-${VER3X}.zip || \
-    wget -c http://www.sqlite.org/2014/sqlite-src-${VER3X}.zip \
-      --no-check-certificate
-test -r sqlite-src-${VER3X}.zip || exit 1
+
+test -r sqlite-src-${VER3X}.tar.gz || exit 1
 test -r extension-functions.c ||
     wget -O extension-functions.c -c \
       'http://www.sqlite.org/contrib/download/extension-functions.c?get=25' \
@@ -276,8 +273,8 @@ test -r extfunc.c || exit 1
 
 rm -f sqlite3
 rm -rf sqlite-src-${VER3X}
-unzip sqlite-src-${VER3X}.zip
-ln -sf sqlite-src-${VER3X} sqlite3
+tar xzf sqlite-src-${VER3X}.tar.gz
+ln -sf SQLite-bbd85d23 sqlite3
 
 patch sqlite3/main.mk <<'EOD'
 --- sqlite3.orig/main.mk        2007-03-31 14:32:21.000000000 +0200
