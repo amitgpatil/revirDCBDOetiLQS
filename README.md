@@ -6,8 +6,9 @@ RefSource is used to create trunk project. This is tested on Linux Mint 18.1 ser
 -----------------------------Getting Started-------------------------------------------
 ---------------------------------------------------------------------------------------
 About project -
-This project can be used to develope SQLite ODBC Driver for windows 32 bit and 64 bit on Linux Mint 18.1 64 bit.
+This project can be used to develope SQLite ODBC Driver for windows 64 bit on Linux Mint 18.1 64 bit.
 Credit goes to http://www.ch-werner.de/sqliteodbc/ 
+You can modify mingw-cross-build.sh for building windows 32 bit driver.
 
 
 Source code used for project:
