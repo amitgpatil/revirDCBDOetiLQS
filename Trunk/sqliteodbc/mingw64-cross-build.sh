@@ -21,7 +21,7 @@
 #                   driver can use System.Data.SQLite.dll instead
 
 #!/bin/bash
-cd /media/amit/8A52F61E52F60F27/SQLiteRND/sqliteodbc-0.9995/sqliteodbc-0.9995
+cd "$(dirname "$0")"
 
 set -e
 
@@ -65,20 +65,17 @@ fi
 echo "=================="
 echo "Preparing zlib ..."
 echo "=================="
-test -r zlib-${VERZ}.tar.gz
 rm -rf zlib-${VERZ}
-tar xzf zlib-${VERZ}.tar.gz
+cp -R ../../RefSource/zlib-${VERZ} zlib-${VERZ}/
 ln -sf zlib-${VERZ} zlib
 
 echo "===================="
 echo "Preparing sqlite ..."
 echo "===================="
 
-$nov2 || test -r sqlite-${VER2}.tar.gz || exit 1
-
 $nov2 || rm -f sqlite
 $nov2 || rm -rf sqlite-${VER2}
-$nov2 || tar xzf sqlite-${VER2}.tar.gz
+$nov2 || cp -R ../../RefSource/sqlite-${VER2} sqlite-${VER2}/
 $nov2 || ln -sf sqlite-${VER2} sqlite
 
 # enable sqlite_encode_binary et.al.
@@ -260,11 +257,9 @@ echo "====================="
 echo "Preparing sqlite3 ..."
 echo "====================="
 
-test -r sqlite-src-${VER3X}.tar.gz || exit 1
-test -r extension-functions.c ||
-    wget -O extension-functions.c -c \
-      'http://www.sqlite.org/contrib/download/extension-functions.c?get=25' \
-      --no-check-certificate
+rm -f extension-functions.c
+cp -R ../../RefSource/ExtensionFunctions/extension-functions.c extension-functions.c
+
 if test -r extension-functions.c ; then
   cp extension-functions.c extfunc.c
   patch < extfunc.patch
@@ -272,9 +267,9 @@ fi
 test -r extfunc.c || exit 1
 
 rm -f sqlite3
-rm -rf sqlite-src-${VER3X}
-tar xzf sqlite-src-${VER3X}.tar.gz
-ln -sf SQLite-bbd85d23 sqlite3
+rm -rf sqlite-${VER3}
+cp -R ../../RefSource/sqlite-${VER3} sqlite-${VER3}/
+ln -sf sqlite-${VER3} sqlite3
 
 patch sqlite3/main.mk <<'EOD'
 --- sqlite3.orig/main.mk        2007-03-31 14:32:21.000000000 +0200
