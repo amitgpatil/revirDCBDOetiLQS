@@ -49,6 +49,6 @@ Building the project:
 
 Customizing the project:
 1. Change version using file VERSION
-2. Change properties by changing .RC files  AND .def and sqlite*odbc.h and .c files (Optional - need only if total change in nomenclature required !)	  
+2. Change properties by changing .RC files  AND .def, sqlite*odbc.h/.c and script files (Optional - need only if total change in nomenclature required !)	  
 
 
